@@ -151,8 +151,8 @@ if [ "$1" = "-install" ]; then
     touch /opt/etc/unblock/tor.txt || chmod 0755 /opt/etc/unblock/tor.txt
     touch /opt/etc/unblock/trojan.txt || chmod 0755 /opt/etc/unblock/trojan.txt
     touch /opt/etc/unblock/vmess.txt || chmod 0755 /opt/etc/unblock/vmess.txt
-    touch /opt/etc/unblock/vpn.txt || chmod 0755 /opt/etc/unblock/vpn.txt
-    echo "Созданы файлы под сайты и ip-адреса для обхода блокировок для SS, Tor, Trojan и v2ray, VPN"
+    # touch /opt/etc/unblock/vpn.txt || chmod 0755 /opt/etc/unblock/vpn.txt
+    echo "Созданы файлы под сайты и ip-адреса для обхода блокировок для SS, TOR, Trojan и v2ray"
 
     # unblock_ipset.sh
     # chmod 777 /opt/bin/unblock_ipset.sh || rm -rfv /opt/bin/unblock_ipset.sh
