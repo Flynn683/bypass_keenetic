@@ -124,7 +124,7 @@ def bot_message(message):
             if message.text == "✅ DNS Override ВКЛ" or message.text == "❌ DNS Override ВЫКЛ":
                 if message.text == "✅ DNS Override ВКЛ":
                     os.system("ndmc -c 'opkg dns-override'")
-                    time.sleep(2)
+                    time.sleep(5)
                     os.system("ndmc -c 'system configuration save'")
                     bot.send_message(message.chat.id, '✅ DNS Override включен!\n🔄 Роутер перезагружается.',
                                      reply_markup=service)
@@ -134,7 +134,7 @@ def bot_message(message):
 
                 if message.text == "❌ DNS Override ВЫКЛ":
                     os.system("ndmc -c 'no opkg dns-override'")
-                    time.sleep(2)
+                    time.sleep(5)
                     os.system("ndmc -c 'system configuration save'")
                     bot.send_message(message.chat.id, '✅ DNS Override выключен!\n🔄 Роутер перезагружается.',
                                      reply_markup=service)
