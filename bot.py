@@ -100,7 +100,7 @@ def bot_message(message):
                 bot.send_message(message.chat.id, '🔄 Выполняется перезагрузка сервисов!', reply_markup=service)
                 os.system('/opt/etc/init.d/S22shadowsocks restart')
                 os.system('/opt/etc/init.d/S22trojan restart')
-                os.system('/opt/etc/init.d/S24v2ray restart')
+                os.system('/opt/etc/init.d/S24xray restart')
                 os.system('/opt/etc/init.d/S35tor restart')
                 bot.send_message(message.chat.id, '✅ Сервисы перезагружены!', reply_markup=service)
                 return
@@ -410,7 +410,7 @@ def bot_message(message):
 
             if level == 9:
                 vmess(message.text)
-                os.system('/opt/etc/init.d/S24v2ray restart')
+                os.system('/opt/etc/init.d/S24xray restart')
                 level = 0
                 bot.send_message(message.chat.id, '✅ Успешно обновлено', reply_markup=main)
 
@@ -540,25 +540,19 @@ def bot_message(message):
         file.close()
         os.chmod(r"/opt/etc/error.log", 0o0755)
 
-def vmess(key):
-    # global appapiid, appapihash, password, localportvmess
-    encodedkey = key[8:]
-    s = base64.b64decode(encodedkey).decode('utf8').replace("'", '"')
-    jsondata = json.loads(s)
-    f = open('/opt/etc/v2ray/config.json', 'w')
-    sh = '{"log":{"access":"/opt/etc/v2ray/access.log","error":"/opt/etc/v2ray/error.log","loglevel":"info"},' \
-         '"inbounds":[{"port":' + str(localportvmess) + ',"listen":"::","protocol":"dokodemo-door",' \
-         '"settings":{"network":"tcp","followRedirect":true},'\
-         '"sniffing":{"enabled":true,"destOverride":["http","tls"]}}],' \
-         '"outbounds":[{"tag":"proxy","domainStrategy":"UseIPv4","protocol":"vmess",' \
-         '"settings":{"vnext":[{"address":"' + str(jsondata["add"]) + '","port":' + str(jsondata["port"]) + ',' \
-         '"users":[{"id":"' + str(jsondata["id"]) + '","alterId":' + str(jsondata["aid"]) + ',' \
-         '"email":"t@t.tt","security":"auto"}]}]},"streamSettings":{"network":"' + str(jsondata["net"]) + '",' \
-         '"security":"tls","tlsSettings":{"allowInsecure":true,"serverName":"' + str(jsondata["add"]) + '"},' \
-         '"wsSettings":{"path":"' + str(jsondata["path"]) + '","headers":{"Host":"' + str(jsondata["host"]) + '"}},' \
-         '"tls":"' + str(jsondata["tls"]) + '"},"mux":{"enabled":true,"concurrency":-1,"xudpConcurrency": 16,"xudpProxyUDP443":"reject"}}],' \
-         '"routing":{"domainStrategy":"IPIfNonMatch",' \
-         '"rules":[{"type":"field","port":"0-65535","outboundTag":"proxy","enabled":true}]}}'
+def xray(key):
+    encodedkey = ' '.join(key)
+    jsondata = json.loads(encodedkey)
+    f = open('/opt/etc/xray/config.json', 'w')
+    sh = '{"log":{"access":"/opt/etc/xray/access.log","error":"/opt/etc/xray/error.log","loglevel":"error"},' \
+         '"inbounds":[{"listen":"127.0.0.1","port":' + str(localportxray) + ',"protocol":"socks",' \
+         '"settings":{"udp":"true"}}],'\
+         '"outbounds":[{"protocol":"vless",' \
+         '"settings":{"vnext":[{"address":' + str(jsondata["address"]) + ',"port":' + str(jsondata["port"]) + ',' \
+         '"users":[{"encryption":"' + str(jsondata["encryption"]) + '", "flow":"' + str(jsondata["flow"]) + '", "id":"' + str(jsondata["id"]) + '"}]}]}' \
+         '"streamSettings":{"network":"' + str(jsondata["network"]) + '",' \
+         '"realitySettings":{"fingerprint":"' + str(jsondata["fingerprint"]) + '","publicKey":"' + str(jsondata["publicKey"]) + '","serverName":"' + str(jsondata["serverName"]) + '","shortId":"' + str(jsondata["shortId"]) + '","spiderX":""},' \
+         '"security":"' + str(jsondata["security"]) + '"}}]},' \
     f.write(sh)
     f.close()
 
