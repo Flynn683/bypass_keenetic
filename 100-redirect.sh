@@ -88,10 +88,10 @@ if [ -z "$(iptables-save 2>/dev/null | grep unblocktor)" ]; then
 fi
 
 
-if [ -z "$(iptables-save 2>/dev/null | grep unblockvmess)" ]; then
-  ipset create unblockvmess hash:net -exist 2>/dev/null
-	iptables -I PREROUTING -w -t nat -p tcp -m set --match-set unblockvmess dst -j REDIRECT --to-port 10810
-	iptables -I PREROUTING -w -t nat -p udp -m set --match-set unblockvmess dst -j REDIRECT --to-port 10810
+if [ -z "$(iptables-save 2>/dev/null | grep unblockxray)" ]; then
+  ipset create unblockxray hash:net -exist 2>/dev/null
+	iptables -I PREROUTING -w -t nat -p tcp -m set --match-set unblockxray dst -j REDIRECT --to-port 10810
+	iptables -I PREROUTING -w -t nat -p udp -m set --match-set unblockxray dst -j REDIRECT --to-port 10810
 
 	#iptables -I PREROUTING -w -t nat -i br0 -p tcp -m set --match-set unblockvmess dst -j REDIRECT --to-port 10810
 	#iptables -I PREROUTING -w -t nat -i br0 -p udp -m set --match-set unblockvmess dst -j REDIRECT --to-port 10810
