@@ -545,7 +545,7 @@ def xray(key):
     jsondata = json.loads(encodedkey)
     f = open('/opt/etc/xray/config.json', 'w')
     sh = '{"log":{"access":"/opt/etc/xray/access.log","error":"/opt/etc/xray/error.log","loglevel":"error"},' \
-         '"inbounds":[{"listen":"127.0.0.1","port":' + str(localportxray) + ',"protocol":"socks",' \
+         '"inbounds":[{"listen":"0.0.0.0","port":' + str(jsondata["port"]) + ',"protocol":"socks",' \
          '"settings":{"udp":"true"}}],'\
          '"outbounds":[{"protocol":"vless",' \
          '"settings":{"vnext":[{"address":' + str(jsondata["address"]) + ',"port":' + str(jsondata["port"]) + ',' \
