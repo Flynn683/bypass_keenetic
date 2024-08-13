@@ -1,7 +1,7 @@
 #!/bin/sh
 ipset flush unblocktor
 ipset flush unblocksh
-ipset flush unblockvmess
+ipset flush unblockxray
 ipset flush unblocktroj
 #ipset flush unblockvpn
 
