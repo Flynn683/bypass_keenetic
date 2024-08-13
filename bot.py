@@ -38,7 +38,7 @@ routerip = config.routerip
 localportsh = config.localportsh
 localporttor = config.localporttor
 localporttrojan = config.localporttrojan
-localportvmess = config.localportvmess
+localportxray = config.localportxray
 dnsporttor = config.dnsporttor
 dnsovertlsport = config.dnsovertlsport
 dnsoverhttpsport = config.dnsoverhttpsport
@@ -390,7 +390,7 @@ def bot_message(message):
                     bot.send_message(message.chat.id, "🔑 Скопируйте ключ сюда", reply_markup=markup)
                     return
 
-                if message.text == 'Vmess':
+                if message.text == 'Xray':
                     #bot.send_message(message.chat.id, "Скопируйте ключ сюда")
                     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
                     back = types.KeyboardButton("🔙 Назад")
@@ -409,7 +409,7 @@ def bot_message(message):
                     return
 
             if level == 9:
-                vmess(message.text)
+                xray(message.text)
                 os.system('/opt/etc/init.d/S24xray restart')
                 level = 0
                 bot.send_message(message.chat.id, '✅ Успешно обновлено', reply_markup=main)
@@ -477,7 +477,7 @@ def bot_message(message):
                 bot.send_message(message.chat.id,
                                  "Установка завершена. Теперь нужно немного настроить роутер и перейти к "
                                  "спискам для разблокировок. "
-                                 "Ключи для Vmess, Shadowsocks и Trojan необходимо установить вручную, "
+                                 "Ключи для Xray, Shadowsocks и Trojan необходимо установить вручную, "
                                  "ключи для Tor можно установить автоматически: " 
                                  "Ключи и Мосты -> Tor -> Tor через telegram.",
                                  reply_markup=main)
@@ -523,7 +523,7 @@ def bot_message(message):
                 markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
                 item1 = types.KeyboardButton("Shadowsocks")
                 item2 = types.KeyboardButton("Tor")
-                item3 = types.KeyboardButton("Vmess")
+                item3 = types.KeyboardButton("Xray")
                 item4 = types.KeyboardButton("Trojan")
                 item5 = types.KeyboardButton("Где брать ключи❔")
                 markup.add(item1, item2)
