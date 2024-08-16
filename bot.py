@@ -540,21 +540,21 @@ def bot_message(message):
         file.close()
         os.chmod(r"/opt/etc/error.log", 0o0755)
 
-def xray(key):
-    encodedkey = ' '.join(key)
-    jsondata = json.loads(encodedkey)
-    f = open('/opt/etc/xray/config.json', 'w')
-    sh = '{"log":{"access":"/opt/etc/xray/access.log","error":"/opt/etc/xray/error.log","loglevel":"error"},' \
-         '"inbounds":[{"listen":"0.0.0.0","port":' + str(jsondata["port"]) + ',"protocol":"socks",' \
-         '"settings":{"udp":"true"}}],'\
-         '"outbounds":[{"protocol":"vless",' \
-         '"settings":{"vnext":[{"address":' + str(jsondata["address"]) + ',"port":' + str(jsondata["port"]) + ',' \
-         '"users":[{"encryption":"' + str(jsondata["encryption"]) + '", "flow":"' + str(jsondata["flow"]) + '", "id":"' + str(jsondata["id"]) + '"}]}]}' \
-         '"streamSettings":{"network":"' + str(jsondata["network"]) + '",' \
-         '"realitySettings":{"fingerprint":"' + str(jsondata["fingerprint"]) + '","publicKey":"' + str(jsondata["publicKey"]) + '","serverName":"' + str(jsondata["serverName"]) + '","shortId":"' + str(jsondata["shortId"]) + '","spiderX":""},' \
-         '"security":"' + str(jsondata["security"]) + '"}}]},' \
-    f.write(sh)
-    f.close()
+#def xray(key):
+#    encodedkey = ' '.join(key)
+#    jsondata = json.loads(encodedkey)
+#    f = open('/opt/etc/xray/config.json', 'w')
+#   sh = '{"log":{"access":"/opt/etc/xray/access.log","error":"/opt/etc/xray/error.log","loglevel":"error"},' \
+#         '"inbounds":[{"listen":"0.0.0.0","port":' + str(jsondata["port"]) + ',"protocol":"socks",' \
+#         '"settings":{"udp":"true"}}],'\
+#         '"outbounds":[{"protocol":"vless",' \
+#         '"settings":{"vnext":[{"address":' + str(jsondata["address"]) + ',"port":' + str(jsondata["port"]) + ',' \
+#         '"users":[{"encryption":"' + str(jsondata["encryption"]) + '", "flow":"' + str(jsondata["flow"]) + '", "id":"' + str(jsondata["id"]) + '"}]}]}' \
+#         '"streamSettings":{"network":"' + str(jsondata["network"]) + '",' \
+#         '"realitySettings":{"fingerprint":"' + str(jsondata["fingerprint"]) + '","publicKey":"' + str(jsondata["publicKey"]) + '","serverName":"' + str(jsondata["serverName"]) + '","shortId":"' + str(jsondata["shortId"]) + '","spiderX":""},' \
+#         '"security":"' + str(jsondata["security"]) + '"}}]},' \
+#    f.write(sh)
+#    f.close()
 
 def trojan(key):
     # global appapiid, appapihash, password, localporttrojan
