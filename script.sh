@@ -10,7 +10,7 @@
 
 # оригинальный репозиторий (tas-unn), FORK by NetworK (ziwork)
 
-repo="flynn683"
+repo="TripleA150"
 
 # ip роутера
 lanip=$(ip addr show br0 | grep -Po "(?<=inet ).*(?=/)" | awk '{print $1}')
